@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tarea from "./Tarea";
 
 //create your first component
 const Home = () => {
 
+	const urlApi = 'https://playground.4geeks.com/todo/users/camilom'
+
 	const [newtodo, setNewTodo] = useState("")
 
-	let [todoList, setTodoList] = useState([
-		"Practicar React",
-		"Practicar Angular",
-		"Practicar Tailwind"
-	]);
+	let [todoList, setTodoList] = useState([]);
+
+	useEffect(() => {
+		// const fetchApiTodo = async () => {
+		// 	try {
+		// 		const res = await fetch(urlApi);
+		// 		const data = await res.json();
+		// 	}
+		// }
+		fetch(urlApi).then(res => {
+			return res.json()
+		}).then(data => {
+			setTodoList(data.todos)
+		})
+	},[])
 
 	const createNewTodo = (key) => {
 		if (key === "Enter") {
@@ -36,7 +48,7 @@ const Home = () => {
 				/>
 
 				{todoList.map((todo, index) => (
-					<Tarea key={index} descripcion={todo} onDelete={() => deletetodo(index)} />
+					<Tarea key={index} descripcion={todo.label} onDelete={() => deletetodo(index)} />
 				))}
 
 				{todoList.length === 0 && <p>No hay tareas</p>}
