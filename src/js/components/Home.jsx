@@ -40,6 +40,10 @@ const Home = () => {
 				))}
 
 				{todoList.length === 0 && <p>No hay tareas</p>}
+
+				<div className="text-sm text-gray-400 text-left mt-4">
+					{todoList.length} {todoList.length === 1 ? 'tarea' : 'tareas'}
+				</div>
 			</div>
 		</div>
 	);
