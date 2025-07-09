@@ -78,7 +78,12 @@ const Home = () => {
 						/>
 					))
 				)}
+				<div className="text-sm text-gray-400 text-left mt-4">
+					{todoList.length} {todoList.length === 1 ? 'tarea' : 'tareas'}
+				</div>
+
 			</div>
+			
 		</div>
 	);
 };
